@@ -47,7 +47,6 @@ export default function HeatMap() {
     fetchParseData();
   }, []);
 
-//   console.log(data)
   
 
   return (
