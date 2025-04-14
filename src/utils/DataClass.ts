@@ -17,7 +17,7 @@ interface CrashData {
   "Estimated Total Comprehensive Cost": number;
   Year: number;
   Mothn: number;
-  Time_of_day: string;
+  DayCycle: string;
 }
 
 
@@ -76,7 +76,7 @@ export default class DataAustin {
       if(crashSeverity !== undefined && crash.crash_sev_id !== crashSeverity){
         isValid = false
       }
-      if(timeOfDay !== undefined && crash.Time_of_day !== timeOfDay){
+      if(timeOfDay !== undefined && crash.DayCycle !== timeOfDay){
         isValid = false
       }
       return isValid

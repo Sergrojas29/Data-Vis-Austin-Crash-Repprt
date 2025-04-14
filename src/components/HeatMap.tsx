@@ -54,6 +54,7 @@ export default function HeatMap() {
       center={[30.2672, -97.7431]}
       zoom={11}
       style={{ height: "100vh", width: "100%" }}
+      className="heatMap"
     >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
