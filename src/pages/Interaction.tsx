@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import DataAustin from "../utils/DataClass";
 import HeatMap from "../components/HeatMap";
+import D3Chart from "../components/D3Chart";
 
 const instance = await DataAustin.create("/AustinCrashData.csv");
 
@@ -205,6 +206,7 @@ export default function Interaction() {
       </div>
       <div className="heatMap">
         <HeatMap/>
+        <D3Chart/>
       </div>
     </>
   );
