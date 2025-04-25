@@ -13,6 +13,9 @@ interface filter {
 }
 
 export default function Interaction() {
+
+  const [tempData, setTempData] = useState<number>(0)
+
   const [filter, setFilter] = useState<filter>({
     fatal: undefined,
     year: undefined,
@@ -28,8 +31,8 @@ export default function Interaction() {
         filter.crashSeverity,
         filter.timeOfDay
       );
-
-      console.log(setData);
+      setTempData(setData.length)
+      // console.log(setData);
     };
 
     fetchData();
@@ -205,7 +208,12 @@ export default function Interaction() {
         </div>
       </div>
       <div className="heatMap">
-        <HeatMap/>
+        
+        {/*FOR DEV PURPOSE ONLY  */}
+        <div>
+            Array lenght :{tempData}
+        </div>
+        {/* <HeatMap/> */}
         <D3Chart/>
       </div>
     </>
