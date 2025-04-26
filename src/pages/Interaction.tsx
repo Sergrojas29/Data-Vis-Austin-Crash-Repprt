@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import DataAustin from "../utils/DataClass";
+import DataAustin, { CrashData } from "../utils/DataClass";
 import HeatMap from "../components/HeatMap";
 import D3Chart from "../components/D3Chart";
 
@@ -14,7 +14,6 @@ interface filter {
 
 export default function Interaction() {
 
-  const [tempData, setTempData] = useState<number>(0)
 
   const [filter, setFilter] = useState<filter>({
     fatal: undefined,
@@ -23,16 +22,18 @@ export default function Interaction() {
     timeOfDay: undefined,
   });
 
+  const [data ,setData] = useState<CrashData[]>()
+
   useEffect(() => {
     const fetchData = async () => {
-      const setData = instance.filter(
+      const info = instance.filter(
         filter.fatal,
         filter.year,
         filter.crashSeverity,
         filter.timeOfDay
       );
-      setTempData(setData.length)
-      // console.log(setData);
+      setData(info)
+      console.log(info);
     };
 
     fetchData();
@@ -209,12 +210,9 @@ export default function Interaction() {
       </div>
       <div className="heatMap">
         
-        {/*FOR DEV PURPOSE ONLY  */}
-        <div>
-            Array lenght :{tempData}
-        </div>
-        {/* <HeatMap/> */}
-        <D3Chart/>
+
+        <HeatMap/>
+        <D3Chart prop ={data}/>
       </div>
     </>
   );

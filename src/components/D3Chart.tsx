@@ -1,10 +1,13 @@
 import * as d3 from "d3";
 import { useEffect, useRef, useState } from "react";
+import DataAustin, { CrashData } from "../utils/DataClass";
 import { data } from "react-router-dom";
 
-export default function D3Chart() {
-  const [Data] = useState([25, 50, 35, 15, 94, 10]);
+export default function D3Chart(prop) {
+  const [Data, setData] = useState<number[]>([0,0,0,0,0,0,0,0,0,0,0,0]);
   const svgRef = useRef();
+
+
 
   useEffect(() => {
     //setting svg
@@ -39,7 +42,9 @@ export default function D3Chart() {
 
     //setting up the data for svg
     svg.selectAll('.line').data([Data]).join('path').attr('d',d => genrateScaleLine(d)).attr('fill','none').attr('stroke','black')
-  }, [Data]);
+    setData(DataAustin.calanderYear(prop.prop))
+    // console.log(DataAustin.calanderYear(prop.prop))
+  }, [prop.prop]);
 
   return (
     <>

@@ -11,7 +11,7 @@ function HeatLayer({ heatData}: {heatData: number[][]}) {
     const heatLayer = L.heatLayer(heatData, {
       radius: 10,
       blur: 0,
-      maxZoom: 12,
+      maxZoom: 14,
       gradient:{0.4: 'blue', 0.65: 'lime', 1: 'red'},
     }).addTo(map);
 

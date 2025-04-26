@@ -1,6 +1,6 @@
 import Papa from "papaparse";
 
-interface CrashData {
+export interface CrashData {
   "Crash ID": number;
   crash_speed_limit: number;
   crash_fatal_fl: boolean;
@@ -16,7 +16,7 @@ interface CrashData {
   "Estimated Maximum Comprehensive Cost": number;
   "Estimated Total Comprehensive Cost": number;
   Year: number;
-  Mothn: number;
+  Month: number;
   DayCycle: string;
 }
 
@@ -81,6 +81,52 @@ export default class DataAustin {
       }
       return isValid
     })
+  }
+
+  /**
+   * calanderYear
+   */
+  public static async calanderYear(data : CrashData[]) {
+    return new Promise((resolve, reject)=>{
+      try {
+        for (let i = 1; i <= 12; i++) {
+          const answer : number = data.filter(e => e.Month == i).length
+          calanderData.push(answer)
+        }
+        resolve(calanderData)
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          console.error(error.message);
+        } else {
+          console.error("An unknown error occurred.");
+        }
+        reject()
+      }
+    })
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    if (data == undefined)
+     return []
+    const calanderData : number[] = []
+    for (let i = 1; i <= 12; i++) {
+      const answer : number = data.filter(e => e.Month == i).length
+      calanderData.push(answer)
+    }
+    return calanderData
+    
   }
 
 
