@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   build: {
-    target: 'esnext', // <- Add this
-    chunkSizeWarningLimit: 4500, // (or whatever size you want in KB)
+    target: 'esnext', // allow async top level
+    chunkSizeWarningLimit: 4500, // (Larger File render)
   },
 })
