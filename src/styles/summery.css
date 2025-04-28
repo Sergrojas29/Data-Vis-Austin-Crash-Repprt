@@ -1,0 +1,38 @@
+.summery{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    position: absolute;
+    opacity: 100;
+    z-index: 90;
+    bottom: calc(-1* var(--cellHeight));
+    background-color: var(--cellBackground);
+    border-radius: 15px;
+    width: var(--cellWidth);
+    height: var(--cellHeight);
+  }
+
+.r1{
+    flex-grow: 1;
+    display: flex;
+    font-size: 16pt;
+    align-items: center;
+    justify-content: center;
+  }
+  .r2{
+    background-color: var(--cellBackground2);
+  }
+  .sumlabel, .sumAmount{
+    display: flex;
+    font-size: 18pt;
+    font-variant-numeric: tabular-nums;
+    width: 50%;
+  }
+  .sumlabel{
+    justify-content: end;
+    padding-right: 10px;
+    color: #8d8d8d;
+  }
+  .sumAmount{
+    padding-left: 10px;
+  }

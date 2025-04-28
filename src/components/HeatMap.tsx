@@ -2,8 +2,11 @@ import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import "leaflet.heat";
-import Papa from "papaparse";
 import { useEffect, useState } from "react";
+import {CrashData} from "../utils/DataClass";
+interface prop {
+  prop: CrashData[];
+}
 
 function HeatLayer({ heatData}: {heatData: number[][]}) {
   const map = useMap();
@@ -18,41 +21,28 @@ function HeatLayer({ heatData}: {heatData: number[][]}) {
     return () => {
       map.removeLayer(heatLayer);
     };
-  }, [map]);
-
+  }, [map, heatData]); //! add to update to when heat datat changes IE function input of prop
   return null;
 }
 
-export default function HeatMap() {
-  const [data, setData] = useState<number[][]>([]);
+
+
+
+
+
+export default function HeatMap({prop}: prop) {
+  const [coordinates, setCoordinates] = useState<number[][]>([])
 
   useEffect(() => {
-    const fetchParseData = async () => {
-      Papa.parse("/FatalData.csv", {
-        download: true,
-        delimiter: ",",
-        header: true,
-        dynamicTyping: true,
-        complete: (res) => {
+    if (prop == undefined ) return
+    setCoordinates(prop.filter((info: any) => info.latitude && info.longitude).map((info: any) => [info.latitude, info.longitude]))
+  }, [prop]);
 
-            const parsedData: number[][] = res.data
-            .filter((info: any) => info.latitude && info.longitude)
-            .map((info: any) => [info.latitude, info.longitude]);
-
-            setData(parsedData);
-        
-        },
-      });
-    };
-    fetchParseData();
-  }, []);
-
-  
 
   return (
     <MapContainer
-      center={[30.2672, -97.7431]}
-      zoom={11}
+      center={[30.254638, -97.691270]}
+      zoom={12}
       style={{ height: "100vh", width: "100%" }}
       className="heatMap"
     >
@@ -60,7 +50,7 @@ export default function HeatMap() {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution="&copy; OpenStreetMap contributors"
       />
-      <HeatLayer heatData={data} />
+      <HeatLayer heatData={coordinates} />
     </MapContainer>
   );
 }

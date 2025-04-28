@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import DataAustin, { CrashData } from "../utils/DataClass";
 import HeatMap from "../components/HeatMap";
 import D3Chart from "../components/D3Chart";
+import Summery from "../components/Summery";
 
-const instance = await DataAustin.create("/AustinCrashData.csv");
+const instance = await DataAustin.create("/AustinCrashData-REFINED.csv");
 
 interface filter {
   fatal: boolean | undefined;
@@ -13,8 +14,6 @@ interface filter {
 }
 
 export default function Interaction() {
-
-
   const [filter, setFilter] = useState<filter>({
     fatal: undefined,
     year: undefined,
@@ -22,7 +21,7 @@ export default function Interaction() {
     timeOfDay: undefined,
   });
 
-  const [data ,setData] = useState<CrashData[]>()
+  const [data, setData] = useState<CrashData[]>();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +31,7 @@ export default function Interaction() {
         filter.crashSeverity,
         filter.timeOfDay
       );
-      setData(info)
+      setData(info);
       console.log(info);
     };
 
@@ -93,12 +92,13 @@ export default function Interaction() {
     { filterTitle: "timeOfDay", value: "Morning" },
     { filterTitle: "timeOfDay", value: "Afternoon" },
     { filterTitle: "timeOfDay", value: "Evening" },
-    { filterTitle: "timeOfDay", value: "Midnight" },
+    { filterTitle: "timeOfDay", value: "Night" },
   ];
 
   return (
     <>
       <div className="interactionMenu">
+        <div className="row title"> Refine Search</div>
         <div className="row">
           {optionsFatal.map((options, i) => {
             const { filterTitle, value } = options;
@@ -106,9 +106,10 @@ export default function Interaction() {
               <label
                 key={i}
                 id="labelCheckBox"
+                className={value == filter.fatal ? "checked" : ""}
                 htmlFor={`${filterTitle}${value}`}
               >
-                {`${value}`}
+                {value != undefined ? `${value}` : "ALL"}
                 <input
                   type="checkbox"
                   className="checkBox"
@@ -126,16 +127,17 @@ export default function Interaction() {
             );
           })}
         </div>
-        <div className="row">
+        <div className="row row2">
           {optionsYear.map((options, i) => {
             const { filterTitle, value } = options;
             return (
               <label
                 key={i}
                 id="labelCheckBox"
+                className={value == filter.year ? "checked" : ""}
                 htmlFor={`${filterTitle}${value}`}
               >
-                {`${value}`}
+                {value != undefined ? `${value}` : "ALL"}
                 <input
                   type="checkbox"
                   className="checkBox"
@@ -160,9 +162,10 @@ export default function Interaction() {
               <label
                 key={i}
                 id="labelCheckBox"
+                className={value == filter.crashSeverity ? "checked" : ""}
                 htmlFor={`${filterTitle}${value}`}
               >
-                {`${value}`}
+                {value != undefined ? `${value}` : "ALL"}
                 <input
                   type="checkbox"
                   className="checkBox"
@@ -180,16 +183,17 @@ export default function Interaction() {
             );
           })}
         </div>
-        <div className="row">
+        <div className="row row2">
           {timeOfDay.map((options, i) => {
             const { filterTitle, value } = options;
             return (
               <label
                 key={i}
                 id="labelCheckBox"
+                className={value == filter.timeOfDay ? "checked" : ""}
                 htmlFor={`${filterTitle}${value}`}
               >
-                {`${value}`}
+                {value != undefined ? `${value}` : "ALL"}
                 <input
                   type="checkbox"
                   className="checkBox"
@@ -207,12 +211,11 @@ export default function Interaction() {
             );
           })}
         </div>
+        <Summery prop ={data}/>
       </div>
       <div className="heatMap">
-        
-
-        <HeatMap/>
-        <D3Chart prop ={data}/>
+        <HeatMap prop ={data}/>
+        {/* <D3Chart prop ={data}/> */}
       </div>
     </>
   );

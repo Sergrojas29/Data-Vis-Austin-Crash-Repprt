@@ -1,22 +1,21 @@
 import Papa from "papaparse";
 
 export interface CrashData {
-  "Crash ID": number;
-  crash_speed_limit: number;
+  CrashID: number;
   crash_fatal_fl: boolean;
+  crash_speed_limit: number;
   latitude: number;
   longitude: number;
   crash_sev_id: number;
   tot_injry_cnt: number;
   death_cnt: number;
   units_involved: string;
-  onsys_fl: boolean;
-  "Crash timestamp (US/Central)": string; // Or Date if you parse it
-  "Crash timestamp": string; // Or Date if you parse it
-  "Estimated Maximum Comprehensive Cost": number;
-  "Estimated Total Comprehensive Cost": number;
+  Crash_timestamp_USCentral : string; // Or Date if you parse it
+  Estimated_Maximum_Comprehensive_Cost: number;
+  Estimated_Total_Comprehensive_Cost: number;
   Year: number;
   Month: number;
+  Day:number;
   DayCycle: string;
 }
 
@@ -59,10 +58,6 @@ export default class DataAustin {
     });
   }
 
-  public byYear(year: number){
-    this.data = this.data.filter((stat: CrashData)=> stat.Year === year)
-  }
-
   // pass as a filter object?
   public filter(fatal: boolean|undefined, year: number|undefined , crashSeverity: number|undefined, timeOfDay: string|undefined): CrashData[]{
     return this.data.filter((crash)=> {
@@ -86,47 +81,22 @@ export default class DataAustin {
   /**
    * calanderYear
    */
-  public static async calanderYear(data : CrashData[]) {
-    return new Promise((resolve, reject)=>{
-      try {
-        for (let i = 1; i <= 12; i++) {
-          const answer : number = data.filter(e => e.Month == i).length
-          calanderData.push(answer)
-        }
-        resolve(calanderData)
-      } catch (error: unknown) {
-        if (error instanceof Error) {
-          console.error(error.message);
-        } else {
-          console.error("An unknown error occurred.");
-        }
-        reject()
+  public static async calendarYear(data : CrashData[]): Promise<number[]> {
+    try {
+      const calendarData: number[] = []
+      for (let i = 1; i <= 12; i++) {
+        const count : number = data.filter(e => e.Month == i).length
+        calendarData.push(count)
       }
-    })
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-    if (data == undefined)
-     return []
-    const calanderData : number[] = []
-    for (let i = 1; i <= 12; i++) {
-      const answer : number = data.filter(e => e.Month == i).length
-      calanderData.push(answer)
+      return calendarData;
+    } catch (error:unknown) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      } else {
+        console.error("An unknown error occurred.");
+      }
+      throw error;
     }
-    return calanderData
-    
   }
 
 

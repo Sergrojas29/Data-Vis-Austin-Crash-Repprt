@@ -1,13 +1,15 @@
 ##
 
-Problems: Parsing 250,000 data point is a lot to render
+Problems: Parsing 217,000 data point is a lot to render
 small this like changing "Crash ID" -> CrashID makes a difference and will be benificail in the long run
 
 Data Set clean up: 
 
 Main key is lat , long 
 removing non pedestrian crash data, removed pedertrian and bicycle only data
-
+Removing Unused Columns like "delete", "Point", "onsys_fl"
+Removing any blank Lat and Long points that would create unwanted view. Removed only 2000 points of data out of the 217,000
+Chaning the Header Names to have no space to be easier to access in object is TypeScript. IE "Crash ID" -> CrashID
 
 | ID | Description | API Field Name | Data Type |
 |---|---|---|---|
