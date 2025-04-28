@@ -8,7 +8,7 @@ interface prop {
   prop: CrashData[];
 }
 
-function HeatLayer({ heatData}: {heatData: number[][]}) {
+function HeatLayer({ heatData }: { heatData: L.HeatLatLngTuple[] }) {
   const map = useMap();
   useEffect(() => {
     const heatLayer = L.heatLayer(heatData, {
@@ -31,11 +31,15 @@ function HeatLayer({ heatData}: {heatData: number[][]}) {
 
 
 export default function HeatMap({prop}: prop) {
-  const [coordinates, setCoordinates] = useState<number[][]>([])
+  const [coordinates, setCoordinates] = useState<L.HeatLatLngTuple[]>([])
 
   useEffect(() => {
     if (prop == undefined ) return
-    setCoordinates(prop.filter((info: any) => info.latitude && info.longitude).map((info: any) => [info.latitude, info.longitude]))
+    setCoordinates(
+      prop
+        .filter((info: any) => info.latitude && info.longitude)
+        .map((info: any) => [info.latitude, info.longitude, 1] as L.HeatLatLngTuple)
+    );
   }, [prop]);
 
 

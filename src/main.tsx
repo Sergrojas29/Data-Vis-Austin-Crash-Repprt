@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 
 import ErrorPage from './pages/ErrorPage'
-import HomePage from "./pages/HomePage";
+// import HomePage from "./pages/HomePage";
 import Interaction from './pages/Interaction';
 
 
