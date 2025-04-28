@@ -5,7 +5,7 @@
 
 | Deployed App | [Texas Heat Viz](https://data-vis-austin-crash-report.onrender.com/) |
 |--|--|
-| Author | [Sergio Rojas-Aguilar](https://github.com/Sergrojas29/NoSLQ-Social-Network-API/edit/main/README.md) |
+| Author | [Sergio Rojas-Aguilar](https://github.com/Sergrojas29) |
 | Data Provided by | [austintexas.gov](https://data.austintexas.gov/Transportation-and-Mobility/Austin-Crash-Report-Data-Crash-Level-Records/y2wy-tgr5/about_data) |
 | Dataset Owner | [transportation.data@austintexas.gov](mailto:transportation.data@austintexas.gov) |
 
