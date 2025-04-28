@@ -1,5 +1,6 @@
 import '../styles/summery.css'
 import LineChartJs from './LineChartJs';
+import {CrashData} from '../utils/DataClass';
 
 interface prop {
   prop: CrashData[];

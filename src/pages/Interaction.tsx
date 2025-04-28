@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import DataAustin, { CrashData } from "../utils/DataClass";
 import HeatMap from "../components/HeatMap";
-import D3Chart from "../components/D3Chart";
+// import D3Chart from "../components/D3Chart";
 import Summery from "../components/Summery";
 
 const instance = await DataAustin.create("/AustinCrashData-REFINED.csv");
+
+
+
 
 interface filter {
   fatal: boolean | undefined;
@@ -211,10 +214,10 @@ export default function Interaction() {
             );
           })}
         </div>
-        <Summery prop ={data}/>
+        <Summery prop={data || []}/>
       </div>
       <div className="heatMap">
-        <HeatMap prop ={data}/>
+        <HeatMap prop ={data || []}/>
         {/* <D3Chart prop ={data}/> */}
       </div>
     </>

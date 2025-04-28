@@ -10,7 +10,8 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import DataAustin from "../utils/DataClass";
+import DataAustin, {CrashData} from "../utils/DataClass";
+
 
 
 interface prop {

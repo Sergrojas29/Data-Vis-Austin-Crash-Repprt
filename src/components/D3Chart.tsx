@@ -2,7 +2,9 @@ import * as d3 from "d3";
 import { useEffect, useRef, useState } from "react";
 import DataAustin, { CrashData } from "../utils/DataClass";
 
-
+interface prop {
+  prop: CrashData[];
+}
 
 export default function D3Chart({prop}: prop) {
   const [Data, setData] = useState<number[]>([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
