@@ -135,3 +135,9 @@ label:hover{
 }
 
 
+@media (max-height: 710px) {
+  .interactionMenu {
+    display: none;
+    position: absolute;
+  }
+}
